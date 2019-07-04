@@ -20,7 +20,7 @@ export function applyDeviations(tokens: Token[], deviations: Deviations, capital
       token = {
         type: TokenType.Word,
         value: deviation[capitalization],
-        normalized: "",
+        normalized: deviation[capitalization],
       };
 
       index += deviation.tokens.length;

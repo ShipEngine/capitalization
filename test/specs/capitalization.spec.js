@@ -66,6 +66,29 @@ const testCases = {
   },
 
 
+  "TheShipEngineSDKForWoocommerce": {
+    sentenceCase: "The ShipEngine SDK for WooCommerce",
+    titleCase: "The ShipEngine SDK for WooCommerce",
+    snakeCase: "the_shipengine_sdk_for_woo_commerce",
+    pascalCase: "TheShipEngineSdkForWooCommerce",
+    camelCase: "theShipEngineSdkForWooCommerce",
+  },
+  "the_shipengine_sdk_for_woocommerce": {
+    sentenceCase: "The ShipEngine SDK for WooCommerce",
+    titleCase: "The ShipEngine SDK for WooCommerce",
+    snakeCase: "the_shipengine_sdk_for_woo_commerce",
+    pascalCase: "TheShipEngineSdkForWooCommerce",
+    camelCase: "theShipEngineSdkForWooCommerce",
+  },
+  "theShipengineSDKForWoocommerce": {
+    sentenceCase: "The ShipEngine SDK for WooCommerce",
+    titleCase: "The ShipEngine SDK for WooCommerce",
+    snakeCase: "the_shipengine_sdk_for_woo_commerce",
+    pascalCase: "TheShipEngineSdkForWooCommerce",
+    camelCase: "theShipEngineSdkForWooCommerce",
+  },
+
+
   "create_ups_4x6_pdf_label": {
     sentenceCase: "Create UPS 4x6 PDF label",
     titleCase: "Create UPS 4x6 PDF Label",
@@ -118,7 +141,7 @@ const testCases = {
     camelCase: "connectPayPalAuECommerceAsin",
   },
   "connectWoocommerceCaEcommerceQrCode": {
-    sentenceCase: "Connect WooCommerce CA e-commerce QR Code",
+    sentenceCase: "Connect WooCommerce CA e-commerce QR code",
     titleCase: "Connect WooCommerce CA E-commerce QR Code",
     snakeCase: "connect_woo_commerce_ca_ecommerce_qr_code",
     pascalCase: "ConnectWooCommerceCaECommerceQrCode",

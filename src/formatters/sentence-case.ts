@@ -48,6 +48,10 @@ export const sentenceCase: Formatter = {
             // Capitalize the first word
             sentence += capitalizeWord(token.value);
           }
+          else if (token.value.length < 5) {
+            // Don't capitalize short words
+            sentence += token.normalized;
+          }
           else {
             // Other words may be capitalized or lowercase, depending on their original value
             sentence += token.value;

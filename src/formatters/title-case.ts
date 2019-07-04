@@ -21,6 +21,8 @@ export const titleCase: Formatter = {
   /**
    * Joins an array of tokens into a Title Case string,
    * with the specified deviations from the normal capitalization rules.
+   *
+   * @see https://capitalizemytitle.com/
    */
   joinTokens(tokens: Token[], deviations: Deviations): string {
     let title = "";
@@ -44,12 +46,16 @@ export const titleCase: Formatter = {
           break;
 
         case TokenType.Word:
-          if (token.value.length < 5 && index > 0 && index < tokens.length - 1) {
-            // Don't capitalize short words (less than 5 characters)
-            // unless they are the first or last word
-            title += token.value;
+          if (index === 0 || index === tokens.length - 1) {
+            // Always capitalize the first and last word in the title
+            title += capitalizeWord(token.value);
+          }
+          else if (token.value.length < 5) {
+            // Don't capitalize short words
+            title += token.normalized;
           }
           else {
+            // Capitalize all other words
             title += capitalizeWord(token.value);
           }
           break;
