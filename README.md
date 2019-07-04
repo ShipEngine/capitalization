@@ -1,13 +1,5 @@
 # ShipEngine Capitalization
-String casing functions with special cases for certain ShipEngine words and phrases
-
-
-
-Features
---------------------------
-- Feature 1
-- Feature 2
-- Feature 3
+String capitalization functions with special cases for certain ShipEngine words and phrases
 
 
 
@@ -15,9 +7,11 @@ Example
 --------------------------
 
 ```javascript
-import capitalization from "@shipengine/capitalization";
+import { snakeCase, pascalCase, titleCase } from "@shipengine/capitalization";
 
-// TODO: Add a usage example here
+snakeCase("TheShipEngineSDKForWoocommerce");        // --> the_shipengine_sdk_for_woo_commerce
+pascalCase("the_shipengine_sdk_for_woocommerce");   // --> TheShipEngineSdkForWooCommerce
+titleCase("theShipengineSDKForWoocommerce");        // --> The ShipEngine SDK for WooCommerce
 ```
 
 
@@ -34,4 +28,17 @@ npm install @shipengine/capitalization
 
 Usage
 --------------------------
-TODO: Document the library's API and CLI usage
+You can import the specific capitalization function(s) that you need to use:
+
+```javascript
+import { kebabCase, camelCase, sentenceCase } from "@shipengine/capitalization";
+```
+
+Or you can import the entire capitalization module and use its methods:
+
+```javascript
+import capitalization from "@shipengine/capitalization";
+
+capitalization.kebabCase("some text");
+```
+
