@@ -1,6 +1,6 @@
 "use strict";
 
-const { snakeCase, camelCase, pascalCase, titleCase, sentenceCase } = require("../..");
+const { snakeCase, kebabCase, camelCase, pascalCase, titleCase, sentenceCase } = require("../..");
 const { expect } = require("chai");
 
 describe("options.prefix", () => {
@@ -25,12 +25,42 @@ describe("options.prefix", () => {
       expect(result).to.equal("size_4x6_inch_label");
     });
 
-    it("should throw an error for snake case strings that start with a number", () => {
+    it("should throw an error for strings that start with a number", () => {
       function noPrefix () {
         snakeCase("4x6 inch label");
       }
 
       expect(noPrefix).to.throw('Unable to convert "4x6 inch label" to snake case. Got "4x6_inch_label", which is invalid.');
+    });
+  });
+
+  describe("kebab case", () => {
+    it("should prefix empty strings", () => {
+      let result = kebabCase("", { prefix: "a Default Value" });
+      expect(result).to.equal("a-default-value");
+    });
+
+    it("should prefix whitespace strings", () => {
+      let result = kebabCase("  \n\t", { prefix: "aDefaultValue" });
+      expect(result).to.equal("a-default-value");
+    });
+
+    it("should prefix all-punctuation strings", () => {
+      let result = kebabCase(".,/<>?;':[]{}|`~!@#$%^&*()=+", { prefix: "aDefaultValue" });
+      expect(result).to.equal("a-default-value");
+    });
+
+    it("should prefix strings that start with a number", () => {
+      let result = kebabCase("4x6 inch label", { prefix: "size" });
+      expect(result).to.equal("size-4x6-inch-label");
+    });
+
+    it("should throw an error for strings that start with a number", () => {
+      function noPrefix () {
+        kebabCase("4x6 inch label");
+      }
+
+      expect(noPrefix).to.throw('Unable to convert "4x6 inch label" to kebab case. Got "4x6-inch-label", which is invalid.');
     });
   });
 
@@ -55,7 +85,7 @@ describe("options.prefix", () => {
       expect(result).to.equal("size4x6InchLabel");
     });
 
-    it("should throw an error for camel case strings that start with a number", () => {
+    it("should throw an error for strings that start with a number", () => {
       function noPrefix () {
         camelCase("4x6 inch label");
       }

@@ -8,8 +8,9 @@
     "casing",
     "capitalization",
     "snake-case",
-    "camel-case",
     "kebab-case",
+    "camel-case",
+    "pascal-case",
     "title-case",
     "sentence-case"
   ],

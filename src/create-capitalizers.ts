@@ -1,5 +1,5 @@
 import { Deviations } from "./deviations";
-import { camelCase, Formatter, pascalCase, sentenceCase, snakeCase, titleCase } from "./formatters";
+import { camelCase, Formatter, kebabCase, pascalCase, sentenceCase, snakeCase, titleCase } from "./formatters";
 import { Options, Settings } from "./settings";
 import { tokenize } from "./tokenizer";
 
@@ -10,6 +10,10 @@ export function createCapitalizers(deviations: Deviations) {
   return {
     snakeCase(text: string, options?: Options): string {
       return capitalize(text, new Settings(options), snakeCase, deviations);
+    },
+
+    kebabCase(text: string, options?: Options): string {
+      return capitalize(text, new Settings(options), kebabCase, deviations);
     },
 
     camelCase(text: string, options?: Options): string {

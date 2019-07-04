@@ -16,6 +16,12 @@ export const capitalization = createCapitalizers(defaultDeviations);
 export const snakeCase = capitalization.snakeCase;
 
 /**
+ * Converts a string to kebab-case (e.g. "Hello, World!" => "hello-world"),
+ * accounting for special cases (e.g. "TheShipEngineAPI" => "the-shipengine-api").
+ */
+export const kebabCase = capitalization.kebabCase;
+
+/**
  * Converts a string to camelCase (e.g. "Hello, World!" => "helloWorld"),
  * accounting for special cases (e.g. "this is the shipengine api" => "thisIsTheShipEngineApi").
  */

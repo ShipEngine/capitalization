@@ -18,7 +18,7 @@ export const snakeCase: Formatter = {
    *   - must not have consecutive underscores
    *
    */
-  pattern: /^[a-z][a-z0-9_]+[a-z0-9]$/,
+  pattern: /^[a-z](_?[a-z0-9]+)*$/,
 
   /**
    * Joins an array of tokens into a snake_cased string,
