@@ -176,6 +176,32 @@ const testCases = {
     pascalCase: "TheShipEngineRestApiIsTheEasiestWayToPrint4x6PdfLabelsForStampsDotComUpsFedExAndDhl",
     camelCase: "theShipEngineRestApiIsTheEasiestWayToPrint4x6PdfLabelsForStampsDotComUpsFedExAndDhl",
   },
+
+  "nZD": {
+    sentenceCase: "NZD",
+    titleCase: "NZD",
+    snakeCase: "nzd",
+    kebabCase: "nzd",
+    pascalCase: "Nzd",
+    camelCase: "nzd",
+  },
+  "Usd": {
+    sentenceCase: "USD",
+    titleCase: "USD",
+    snakeCase: "usd",
+    kebabCase: "usd",
+    pascalCase: "Usd",
+    camelCase: "usd",
+  },
+  "aud": {
+    sentenceCase: "AUD",
+    titleCase: "AUD",
+    snakeCase: "aud",
+    kebabCase: "aud",
+    pascalCase: "Aud",
+    camelCase: "aud",
+  },
+
 };
 
 for (let { functionName } of names) {
