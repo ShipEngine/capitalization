@@ -8,12 +8,25 @@ export function normalizeAcronyms(acronyms: Acronym[] = []): Deviation[] {
   let deviations = [];
 
   for (let acronym of acronyms) {
-    deviations.push({
-      tokens: [acronym],
-      snake: acronym,
-      pascal: capitalizeWord(acronym),
-      human: acronym.toUpperCase(),
-    });
+    let variations = [
+      [acronym],                                      // ex: ca, nzd, ups, https
+      [acronym[0], acronym.slice(1)],                 // ex: c_a, n_zd, u_ps, h_ttps
+    ];
+
+    if (acronym.length > 2) {
+      variations.push([
+        acronym.slice(0, -1), acronym.slice(-1)       // ex: n_zd, u_ps, h_ttps
+      ]);
+    }
+
+    for (let variation of variations) {
+      deviations.push({
+        tokens: variation,
+        snake: acronym,
+        pascal: capitalizeWord(acronym),
+        human: acronym.toUpperCase(),
+      });
+    }
   }
 
   return deviations;
