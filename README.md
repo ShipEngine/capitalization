@@ -1,4 +1,5 @@
-# ShipEngine Capitalization
+ShipEngine Capitalization
+==============================================
 String capitalization functions with special cases for certain ShipEngine words and phrases
 
 
