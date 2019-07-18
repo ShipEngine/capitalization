@@ -29,4 +29,5 @@ export enum TokenType {
   Word,
   Number,
   Punctuation,
+  Deviation,
 }

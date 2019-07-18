@@ -60,7 +60,15 @@ export class Deviations {
         deviationToken = deviation.tokens[i];
         token = tokens[index + i];
 
-        if (!token || token.normalized !== deviationToken) {
+        if (!token) {
+          // Not a match, because there aren't enough tokens
+          continue outerLoop;
+        }
+        else if (typeof deviationToken === "string" && token.normalized !== deviationToken) {
+          // Not a match
+          continue outerLoop;
+        }
+        else if (deviationToken instanceof RegExp && !deviationToken.test(token.normalized)) {
           // Not a match
           continue outerLoop;
         }

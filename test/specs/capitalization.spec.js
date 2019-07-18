@@ -202,6 +202,55 @@ const testCases = {
     camelCase: "aud",
   },
 
+  "line1": {
+    sentenceCase: "Line 1",
+    titleCase: "Line 1",
+    snakeCase: "line1",
+    kebabCase: "line1",
+    pascalCase: "Line1",
+    camelCase: "line1",
+  },
+  "line_2": {
+    sentenceCase: "Line 2",
+    titleCase: "Line 2",
+    snakeCase: "line2",
+    kebabCase: "line2",
+    pascalCase: "Line2",
+    camelCase: "line2",
+  },
+  "this_is_line_3_of_the_address": {
+    sentenceCase: "This is line 3 of the address",
+    titleCase: "This is Line 3 of the Address",
+    snakeCase: "this_is_line3_of_the_address",
+    kebabCase: "this-is-line3-of-the-address",
+    pascalCase: "ThisIsLine3OfTheAddress",
+    camelCase: "thisIsLine3OfTheAddress",
+  },
+
+  "a1000": {
+    sentenceCase: "a1000",
+    titleCase: "a1000",
+    snakeCase: "a1000",
+    kebabCase: "a1000",
+    pascalCase: "A1000",
+    camelCase: "a1000",
+  },
+  "r_1003": {
+    sentenceCase: "r1003",
+    titleCase: "r1003",
+    snakeCase: "r1003",
+    kebabCase: "r1003",
+    pascalCase: "R1003",
+    camelCase: "r1003",
+  },
+  "Address validation codes range from A1000 to R 1003.": {
+    sentenceCase: "Address validation codes range from a1000 to r1003.",
+    titleCase: "Address Validation Codes Range from a1000 to r1003.",
+    snakeCase: "address_validation_codes_range_from_a1000_to_r1003",
+    kebabCase: "address-validation-codes-range-from-a1000-to-r1003",
+    pascalCase: "AddressValidationCodesRangeFromA1000ToR1003",
+    camelCase: "addressValidationCodesRangeFromA1000ToR1003",
+  },
 };
 
 for (let { functionName } of names) {

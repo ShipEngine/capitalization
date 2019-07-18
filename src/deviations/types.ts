@@ -2,10 +2,18 @@
  * A deviation from the normal capitalization rules.
  */
 export interface Deviation {
-  tokens: string[];
+  tokens: TokenMatcher[];
   snake: string;
   pascal: string;
-  human: string;
+  human: string | HumanValue;
+}
+
+/**
+ * A humanized deviation value
+ */
+export interface HumanValue {
+  title: string;
+  normal: string;
 }
 
 /**
@@ -40,8 +48,13 @@ export type SeparatedWords = string[];
  * (e.g. ["dot", "net"] => ".Net")
  */
 export interface SpecialCase {
-  tokens: string[][];
+  tokens: TokenMatcher[][];
   snake: string;
   pascal: string;
-  human: string;
+  human: string | HumanValue;
 }
+
+/**
+ * A normalized token value, or a RegExp pattern that matches a normalized token value
+ */
+export type TokenMatcher = string | RegExp;

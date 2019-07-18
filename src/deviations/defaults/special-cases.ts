@@ -144,7 +144,10 @@ export const specialCases: SpecialCase[] = [
     ],
     snake: "ecommerce",
     pascal: "ECommerce",
-    human: "e-commerce",
+    human: {
+      title: "E-commerce",
+      normal: "e-commerce",
+    },
   },
   {
     tokens: [
@@ -162,6 +165,35 @@ export const specialCases: SpecialCase[] = [
     snake: "4x6",
     pascal: "4x6",
     human: "4x6",
+  },
+  {
+    tokens: [
+      ["line", /^\d$/],   // Address lines
+    ],
+    snake: "line{1}",
+    pascal: "Line{1}",
+    human: {
+      title: "Line {1}",
+      normal: "line {1}",
+    },
+  },
+
+  // Address verification codes
+  {
+    tokens: [
+      ["a", /^100\d$/],
+    ],
+    snake: "a{1}",
+    pascal: "A{1}",
+    human: "a{1}",
+  },
+  {
+    tokens: [
+      ["r", /^100\d$/],
+    ],
+    snake: "r{1}",
+    pascal: "R{1}",
+    human: "r{1}",
   },
 
 ];

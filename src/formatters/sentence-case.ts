@@ -43,13 +43,24 @@ export const sentenceCase: Formatter = {
           sentence += token.normalized;
           break;
 
+        case TokenType.Deviation:
+          if (index === 0) {
+            // Use title case for the first word
+            sentence += token.value;
+          }
+          else {
+            // Use normal case for all other words
+            sentence += token.normalized;
+          }
+          break;
+
         case TokenType.Word:
           if (index === 0) {
             // Capitalize the first word
             sentence += capitalizeWord(token.value);
           }
           else if (token.value.length < 5) {
-            // Don't capitalize short words
+            // Use lowercase versions of short words
             sentence += token.normalized;
           }
           else {

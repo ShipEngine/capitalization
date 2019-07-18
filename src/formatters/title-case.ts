@@ -45,6 +45,21 @@ export const titleCase: Formatter = {
           title += token.normalized;
           break;
 
+        case TokenType.Deviation:
+          if (index === 0 || index === tokens.length - 1) {
+            // Use title case for the first and last words
+            title += token.value;
+          }
+          else if (token.value.length < 5) {
+            // Use normal case versions of short words
+            title += token.normalized;
+          }
+          else {
+            // Use title case for all other words
+            title += token.value;
+          }
+          break;
+
         case TokenType.Word:
           if (index === 0 || index === tokens.length - 1) {
             // Always capitalize the first and last word in the title

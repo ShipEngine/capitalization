@@ -45,11 +45,14 @@ export function normalizeCombinedWords(combinedWords: CombinedWords[] = []): Dev
     // PascalCase (e.g. "ShipEngine")
     let pascal = words.map(capitalizeWord).join("");
 
+    // Humanized (e.g. "ShipEngine")
+    let human = pascal;
+
     // Add a deviation for each word as its own token (e.g. ["ship", "engine"] )
-    deviations.push({ tokens: words, snake, pascal, human: pascal });
+    deviations.push({ tokens: words, snake, pascal, human });
 
     // Add a deviation for all words in a single token (e.g. ["shipengine"] )
-    deviations.push({ tokens: [words.join("")], snake, pascal, human: pascal });
+    deviations.push({ tokens: [words.join("")], snake, pascal, human });
   }
 
   return deviations;
@@ -68,11 +71,14 @@ export function normalizeSeparatedWords(separatedWords: SeparatedWords[] = []): 
     // PascalCase (e.g. "WooCommerce")
     let pascal = words.map(capitalizeWord).join("");
 
+    // Humanized (e.g. "WooCommerce")
+    let human = pascal;
+
     // Add a deviation for each word as its own token (e.g. ["woo", "commerce"] )
-    deviations.push({ tokens: words, snake, pascal, human: pascal });
+    deviations.push({ tokens: words, snake, pascal, human });
 
     // Add a deviation for all words in a single token (e.g. ["woocommerce"] )
-    deviations.push({ tokens: [words.join("")], snake, pascal, human: pascal });
+    deviations.push({ tokens: [words.join("")], snake, pascal, human });
   }
 
   return deviations;

@@ -24,10 +24,15 @@ describe("defaultDeviations", () => {
   it("all tokens should be lowercase", () => {
     for (let deviation of defaultDeviations) {
       for (let token of deviation.tokens) {
-        expect(token).to.equal(token.toLowerCase(),
-          `The ${deviation.snake} deviation rule has invalid tokens. ` +
-          "All tokens must be lowercase. " + JSON.stringify(deviation.tokens)
-        );
+        if (typeof token === "string") {
+          expect(token).to.equal(token.toLowerCase(),
+            `The ${deviation.snake} deviation rule has invalid tokens. ` +
+            "All tokens must be lowercase. " + JSON.stringify(deviation.tokens)
+          );
+        }
+        else {
+          expect(token).to.be.an.instanceOf(RegExp);
+        }
       }
     }
   });
