@@ -2,7 +2,6 @@
 
 const capitalization = require("../..");
 const { expect } = require("chai");
-const names = require("../utils/names");
 
 /* eslint-disable quote-props */
 const testCases = {
@@ -38,11 +37,27 @@ const testCases = {
     pascalCase: "ShipEngine",
     camelCase: "shipEngine",
   },
+  "ship-engine": {
+    sentenceCase: "ShipEngine",
+    titleCase: "ShipEngine",
+    snakeCase: "shipengine",
+    kebabCase: "shipengine",
+    pascalCase: "ShipEngine",
+    camelCase: "shipEngine",
+  },
 
 
   "ShipEngine RestAPI": {
     sentenceCase: "ShipEngine REST API",
     titleCase: "ShipEngine REST API",
+    snakeCase: "shipengine_rest_api",
+    kebabCase: "shipengine-rest-api",
+    pascalCase: "ShipEngineRestApi",
+    camelCase: "shipEngineRestApi",
+  },
+  "ShipEngine (Rest) API": {
+    sentenceCase: "ShipEngine (REST) API",
+    titleCase: "ShipEngine (REST) API",
     snakeCase: "shipengine_rest_api",
     kebabCase: "shipengine-rest-api",
     pascalCase: "ShipEngineRestApi",
@@ -132,6 +147,14 @@ const testCases = {
     pascalCase: "CreateFedEx4x6ZplLabel",
     camelCase: "createFedEx4x6ZplLabel",
   },
+  "create-DHL-e-commerce-4x6-PDF-label": {
+    sentenceCase: "Create DHL e-commerce 4x6 PDF label",
+    titleCase: "Create DHL E-commerce 4x6 PDF Label",
+    snakeCase: "create_dhl_ecommerce_4x6_pdf_label",
+    kebabCase: "create-dhl-ecommerce-4x6-pdf-label",
+    pascalCase: "CreateDhlECommerce4x6PdfLabel",
+    camelCase: "createDhlECommerce4x6PdfLabel",
+  },
 
 
   "connect_channeladvisor_eu_ecommerce_sku": {
@@ -166,9 +189,17 @@ const testCases = {
     pascalCase: "ConnectWooCommerceCaECommerceQrCode",
     camelCase: "connectWooCommerceCaECommerceQrCode",
   },
+  "Connect Woo Commerce CA E+Commerce QRCode": {
+    sentenceCase: "Connect WooCommerce CA e-commerce QR code",
+    titleCase: "Connect WooCommerce CA E-commerce QR Code",
+    snakeCase: "connect_woo_commerce_ca_ecommerce_qr_code",
+    kebabCase: "connect-woo-commerce-ca-ecommerce-qr-code",
+    pascalCase: "ConnectWooCommerceCaECommerceQrCode",
+    camelCase: "connectWooCommerceCaECommerceQrCode",
+  },
 
 
-  "the shipengine rest api is the easiest way to print +4x+6 pdf labels for stamps.com, ups, fedex, and dhl... ": {
+  "the shipengine rest api is the easiest way to print +4x+6 pdf labels for stamps.com, ups, fedex, and dhl...      ": {
     sentenceCase: "The ShipEngine REST API is the easiest way to print 4x6 PDF labels for Stamps.com, UPS, FedEx, and DHL...",
     titleCase: "The ShipEngine REST API is the Easiest way to Print 4x6 PDF Labels for Stamps.com, UPS, FedEx, and DHL...",
     snakeCase: "the_shipengine_rest_api_is_the_easiest_way_to_print_4x6_pdf_labels_for_stamps_dot_com_ups_fedex_and_dhl",
@@ -253,13 +284,26 @@ const testCases = {
   },
 };
 
-for (let { functionName } of names) {
-  describe(`${functionName}()`, () => {
-    for (let [input, outputs] of Object.entries(testCases)) {
-      it(`Should ${functionName} ${JSON.stringify(input)}`, () => {
-        let result = capitalization[functionName](input);
-        expect(result).to.equal(outputs[functionName]);
-      });
+describe("Capitalization tests", () => {
+  for (let [input, { only, ...outputs }] of Object.entries(testCases)) {
+    let testSuite = describe;
+    let test = it;
+
+    if (only === true) {
+      testSuite = describe.only;
     }
-  });
-}
+    else if (typeof only === "string") {
+      test = it.only;
+      outputs = { [only]: outputs[only] };
+    }
+
+    testSuite(input, () => {
+      for (let [functionName, output] of Object.entries(outputs)) {
+        test(functionName, () => {
+          let result = capitalization[functionName](input);
+          expect(result).to.equal(output);
+        });
+      }
+    });
+  }
+});
