@@ -32,7 +32,9 @@ export const titleCase: Formatter = {
 
     for (let [index, token] of tokens.entries()) {
       // Insert spaces between tokens (except punctuation tokens)
-      if (index > 0 && token.type !== TokenType.Punctuation) {
+      if (index > 0
+      && token.type !== TokenType.Punctuation
+      && tokens[index - 1].type !== TokenType.Punctuation) {
         title += " ";
       }
 
@@ -42,7 +44,13 @@ export const titleCase: Formatter = {
           break;
 
         case TokenType.Punctuation:
-          title += token.normalized;
+          if (index === tokens.length - 1) {
+            // This punctuation is at the end of the title, so trim any trailing whitespace
+            title += token.value.trimEnd();
+          }
+          else {
+            title += token.value;
+          }
           break;
 
         case TokenType.Deviation:

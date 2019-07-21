@@ -33,12 +33,13 @@ export function nextToken(text: string): [Token | undefined, number, number] {
   if (char.isUpper) {
     if (nextChar.isLower) {
       // A capitalized word (capital letter followed by lowercase letters)
-      let [value] = lowercaseLettersPattern.exec(text.slice(start + 1))!;
+      let firstLetter = text[start];
+      let [restOfWord] = lowercaseLettersPattern.exec(text.slice(start + 1))!;
 
       token = {
         type: TokenType.Word,
-        value: text[start] + value,
-        normalized: text[start].toLowerCase() + value,
+        value: firstLetter + restOfWord,
+        normalized: firstLetter.toLowerCase() + restOfWord,
       };
     }
     else {
@@ -80,20 +81,29 @@ export function nextToken(text: string): [Token | undefined, number, number] {
   }
   else if ((char.code === plus || char.code === minus) && nextChar.isNumber) {
     // This is a signed number
+    let sign = text[start];
     let [value] = numberPattern.exec(text.slice(start + 1))!;
 
     token = {
       type: TokenType.Number,
-      value: text[start] + value,
+      value: sign + value,
       normalized: String(parseFloat(value)),
     };
   }
   else {
     // This is a puncutation character
+    let puncutation = text[start];
+
+    // Include 1 leading and trailing separator character, if any.
+    // This lets us know whether the punctuation originally had leading whitespace.
+    let leadingSeparator = start === 0 ? "" : " ";
+    let trailingSeparator = findTokenStart(text.slice(start + 1, start + 2)) === 0 ? "" : " ";
+    start = Math.max(0, start - 1);
+
     token = {
       type: TokenType.Punctuation,
-      value: text[start],
-      normalized: text[start],
+      value: leadingSeparator + puncutation + trailingSeparator,
+      normalized: puncutation,
     };
   }
 

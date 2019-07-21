@@ -137,7 +137,7 @@ describe("options.prefix", () => {
 
     it("should prefix all-punctuation strings", () => {
       let result = sentenceCase(".,/<>?;':[]{}|`~!@#$%^&*()=+", { prefix: "a_default_value" });
-      expect(result).to.equal("A default value.,/<>?;':[]{}|`~!@#$%^&*()=+");
+      expect(result).to.equal("A default value .,/<>?;':[]{}|`~!@#$%^&*()=+");
     });
 
     it("should not prefix strings that start with a number", () => {
@@ -164,7 +164,7 @@ describe("options.prefix", () => {
 
     it("should prefix all-punctuation strings", () => {
       let result = titleCase(".,/<>?;':[]{}|`~!@#$%^&*()=+", { prefix: "a_default_value" });
-      expect(result).to.equal("A Default Value.,/<>?;':[]{}|`~!@#$%^&*()=+");
+      expect(result).to.equal("A Default Value .,/<>?;':[]{}|`~!@#$%^&*()=+");
     });
 
     it("should not prefix strings that start with a number", () => {

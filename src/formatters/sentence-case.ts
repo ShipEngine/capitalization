@@ -30,7 +30,9 @@ export const sentenceCase: Formatter = {
 
     for (let [index, token] of tokens.entries()) {
       // Insert spaces between tokens (except punctuation tokens)
-      if (index > 0 && token.type !== TokenType.Punctuation) {
+      if (index > 0
+      && token.type !== TokenType.Punctuation
+      && tokens[index - 1].type !== TokenType.Punctuation) {
         sentence += " ";
       }
 
@@ -40,7 +42,13 @@ export const sentenceCase: Formatter = {
           break;
 
         case TokenType.Punctuation:
-          sentence += token.normalized;
+          if (index === tokens.length - 1) {
+            // This punctuation is at the end of the sentence, so trim any trailing whitespace
+            sentence += token.value.trimEnd();
+          }
+          else {
+            sentence += token.value;
+          }
           break;
 
         case TokenType.Deviation:
