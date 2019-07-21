@@ -17,6 +17,12 @@ export function applyDeviations(tokens: Token[], deviations: Deviations, capital
     let [deviation, start, end] = deviations.find(tokens);
 
     if (deviation) {
+      if (start > 0) {
+        // There are some punctuation tokens before the deviation starts,
+        // so just add them to the results
+        results.push(...tokens.slice(0, start));
+      }
+
       // Substitute a new token for this token sequence
       token = applyDeviation(deviation, capitalization, tokens.slice(start, end + 1));
       tokens = tokens.slice(end + 1);

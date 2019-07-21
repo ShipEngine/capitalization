@@ -1,5 +1,5 @@
 import { Capitalization } from "../formatters";
-import { Token } from "../tokenizer";
+import { Token, TokenType } from "../tokenizer";
 import { applyDeviations } from "./apply-deviations";
 import { normalizeAcronyms, normalizeCombinedWords, normalizeSeparatedWords, normalizeSpecialCases } from "./normalize";
 import { Deviation, DeviationConfig } from "./types";
@@ -53,32 +53,50 @@ export class Deviations {
    * The matched Deviation (if any), and the start and end indexes of the token sequence that matched it
    */
   public find(tokens: Token[]): [Deviation | undefined, number, number] {
-    let deviation: Deviation, i, deviationToken, token;
+    let deviation: Deviation, start = 0, end = 0, deviationToken, token, isMatch;
 
     // Loop thorugh all the deviations
     outerLoop:
     for (deviation of this._deviations) {
       // Compare each token in the deviation to the corresponding token in the sequence
-      for (i = 0; i < deviation.tokens.length; i++) {
+      for (let i = 0; i < deviation.tokens.length; i++) {
         deviationToken = deviation.tokens[i];
-        token = tokens[i];
+        isMatch = false;
 
-        if (!token) {
-          // Not a match, because there aren't enough tokens
-          continue outerLoop;
+        for (let j = i; j < tokens.length; j++) {
+          token = tokens[j];
+
+          if (typeof deviationToken === "string") {
+            isMatch = token.normalized === deviationToken;
+          }
+          else if (deviationToken instanceof RegExp) {
+            isMatch = deviationToken.test(token.normalized);
+          }
+
+          if (isMatch) {
+            // This token matches the deviation token.
+            // So update the start and end positions, as needed.
+            i === 0 && (start = j);
+            end = j;
+            break;
+          }
+          else if (token.type === TokenType.Punctuation) {
+            // This is a punctuation token, so ignore it and see if the next token matches
+            continue;
+          }
+          else {
+            // Not a match
+            break;
+          }
         }
-        else if (typeof deviationToken === "string" && token.normalized !== deviationToken) {
-          // Not a match
-          continue outerLoop;
-        }
-        else if (deviationToken instanceof RegExp && !deviationToken.test(token.normalized)) {
-          // Not a match
+
+        if (!isMatch) {
           continue outerLoop;
         }
       }
 
       // All tokens match
-      return [deviation, 0, i - 1];
+      return [deviation, start, end];
     }
 
     // There was no match
