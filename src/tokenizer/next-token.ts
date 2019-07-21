@@ -2,6 +2,7 @@ import { character } from "../utils";
 import { Token, TokenType } from "./types";
 
 const whitespace = 32;
+const hyphen = 45;
 const underscore = 95;
 const plus = 43;
 const minus = 45;
@@ -108,7 +109,7 @@ function findTokenStart(text: string): number {
 
   while (index < text.length) {
     code = text.charCodeAt(index);
-    isSeparator = code <= whitespace || code === underscore;
+    isSeparator = code <= whitespace || code === hyphen || code === underscore;
     if (!isSeparator) break;
     index++;
   }
