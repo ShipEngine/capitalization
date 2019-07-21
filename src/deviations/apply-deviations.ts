@@ -9,20 +9,20 @@ import { Deviation } from "./types";
  */
 export function applyDeviations(tokens: Token[], deviations: Deviations, capitalization: Capitalization): Token[] {
   let results = [];
-  let deviation, token: Token, index = 0;
+  let token: Token;
 
   // Loop through all the tokens
-  while (index < tokens.length) {
+  while (tokens.length > 0) {
     // Is there a deviation for this token sequence?
-    deviation = deviations.find(tokens, index);
+    let [deviation, start, end] = deviations.find(tokens);
 
     if (deviation) {
       // Substitute a new token for this token sequence
-      token = applyDeviation(deviation, capitalization, tokens, index);
-      index += deviation.tokens.length;
+      token = applyDeviation(deviation, capitalization, tokens.slice(start, end + 1));
+      tokens = tokens.slice(end + 1);
     }
     else {
-      token = tokens[index++];
+      token = tokens.shift()!;
 
       switch (capitalization) {
         case Capitalization.Snake:
@@ -53,7 +53,7 @@ export function applyDeviations(tokens: Token[], deviations: Deviations, capital
 /**
  * Applies nonstandard capitalization rules and returns a new token to replace the orignal token(s)
  */
-function applyDeviation(deviation: Deviation, capitalization: Capitalization, tokens: Token[], index: number): Token {
+function applyDeviation(deviation: Deviation, capitalization: Capitalization, tokens: Token[]): Token {
   let token: Token = {
     type: TokenType.Deviation,
     value: "",
@@ -72,7 +72,7 @@ function applyDeviation(deviation: Deviation, capitalization: Capitalization, to
 
   // But some replacement values include RegExp placeholders
   if (token.value.includes("{")) {
-    replaceTokenPlaceholders(token, tokens.slice(index, index + deviation.tokens.length));
+    replaceTokenPlaceholders(token, tokens);
   }
 
   return token;

@@ -6,13 +6,14 @@ import { Token } from "./types";
  */
 export function tokenize(text: string): Token[] {
   let tokens = [];
-  let token, index = 0;
 
   // Split the text into an array of tokens
-  while (index < text.length) {
-    [index, token] = nextToken(text, index);
+  while (text.length > 0) {
+    let [token, , end] = nextToken(text);
     if (!token) break;
+
     tokens.push(token);
+    text = text.slice(end + 1);
   }
 
   return tokens;

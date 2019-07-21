@@ -48,8 +48,11 @@ export class Deviations {
    *
    * @param tokens - An array of tokens to find in the deviations list
    * @param [index] - The index in `tokens` to begin matching
+   *
+   * @returns
+   * The matched Deviation (if any), and the start and end indexes of the token sequence that matched it
    */
-  public find(tokens: Token[], index = 0): Deviation | undefined {
+  public find(tokens: Token[]): [Deviation | undefined, number, number] {
     let deviation: Deviation, i, deviationToken, token;
 
     // Loop thorugh all the deviations
@@ -58,7 +61,7 @@ export class Deviations {
       // Compare each token in the deviation to the corresponding token in the sequence
       for (i = 0; i < deviation.tokens.length; i++) {
         deviationToken = deviation.tokens[i];
-        token = tokens[index + i];
+        token = tokens[i];
 
         if (!token) {
           // Not a match, because there aren't enough tokens
@@ -75,8 +78,11 @@ export class Deviations {
       }
 
       // All tokens match
-      return deviation;
+      return [deviation, 0, i - 1];
     }
+
+    // There was no match
+    return [undefined, 0, tokens.length];
   }
 }
 
