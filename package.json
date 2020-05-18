@@ -35,9 +35,9 @@
   },
   "engineStrict": true,
   "scripts": {
-    "clean": "shx rm -rf lib",
+    "clean": "shx rm -rf .nyc_output coverage lib",
     "lint": "npm run lint:typescript && npm run lint:javascript",
-    "coverage": "nyc npm run test",
+    "coverage": "nyc node_modules/mocha/bin/mocha",
     "lint:typescript": "tslint -p tsconfig.json",
     "lint:javascript": "eslint test",
     "build": "tsc",
