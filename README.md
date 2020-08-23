@@ -3,6 +3,16 @@ ShipEngine Capitalization
 String capitalization functions with special cases for certain ShipEngine words and phrases
 
 
+[![Cross-Platform Compatibility](https://shipengine.github.io/img/badges/os-badges.svg)](https://github.com/ShipEngine/capitalization/actions)
+[![Build Status](https://github.com/ShipEngine/capitalization/workflows/CI-CD/badge.svg)](https://github.com/ShipEngine/capitalization/actions)
+
+[![Coverage Status](https://coveralls.io/repos/github/ShipEngine/capitalization/badge.svg?branch=master)](https://coveralls.io/github/ShipEngine/capitalization)
+[![Dependencies](https://david-dm.org/ShipEngine/capitalization.svg)](https://david-dm.org/ShipEngine/capitalization)
+
+[![npm](https://img.shields.io/npm/v/@shipengine/capitalization.svg)](https://www.npmjs.com/package/@shipengine/capitalization)
+[![License](https://img.shields.io/npm/l/@shipengine/capitalization.svg)](LICENSE)
+
+
 
 Example
 --------------------------
