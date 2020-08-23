@@ -1,6 +1,6 @@
 {
   "name": "@shipengine/capitalization",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "String capitalization functions with special cases for certain ShipEngine words and phrases",
   "keywords": [
     "shipengine",
